@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   spotifyId: { type: String, required: true, unique: true },
@@ -7,4 +7,4 @@ const userSchema = new mongoose.Schema({
   refreshToken: String,
 });
 
-module.exports = mongoose.model("User", userSchema);
+export default mongoose.model("User", userSchema);

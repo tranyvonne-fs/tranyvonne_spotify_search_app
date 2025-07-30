@@ -1,25 +1,26 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-
+import dotenv from 'dotenv';
 dotenv.config();
+
+console.log("✅ CLIENT_ID from .env:", process.env.SPOTIFY_CLIENT_ID);
+
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+
+import { router as authRoutes, callbackHandler } from './routes/auth.js';
+import searchRoutes from './routes/search.js';
+import validateJWT from './middleware/validateJWT.js';
+
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-// Routes
-const { router: authRoutes, callbackHandler } = require('./routes/auth');
-const searchRoutes = require('./routes/search');
-const validateJWT = require('./middleware/validateJWT');
 
 app.use('/auth', authRoutes);
 app.get('/callback', callbackHandler);
 app.use('/search', searchRoutes);
 app.get('/auth/validate', validateJWT);
 
-// DB connection (optional, if not connected yet)
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection failed:', err));
 

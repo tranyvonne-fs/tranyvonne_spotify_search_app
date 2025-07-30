@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "Waltograph";
+  src: url("/Users/yvonnetran/Desktop/Project and Portfolio III/tranyvonne_spotify_search_app/frontend/public/fonts/waltographUI.ttf") format("truetype");
+}
+
+.magic-title {
+  font-family: "Waltograph", cursive;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  font-family: "Poiret One", sans-serif;
+  background: linear-gradient(to bottom right, #cfe0ff, #f5d8ff);
+}
+
+.login-container h1 {
+  font-size: 3rem;
+  color: #6c63ff;
+  margin-bottom: 1rem;
+}
+
+.login-container p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.login-button {
+  margin-top: 20px;
+  background-color: #1db954;
+  color: white;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #1ed760;
+}
+
+@media (max-width: 500px) {
+  .login-container h1 {
+    font-size: 2rem;
+  }
+
+  .login-btn {
+    width: 80%;
+    font-size: 1rem;
+  }
+}

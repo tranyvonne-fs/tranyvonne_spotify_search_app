@@ -1,0 +1,108 @@
+
+.spotify-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 100px;
+}
+
+.spotify-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-family: "Cinzel Decorative", cursive;
+  color: #a45ee5; /* royal purple */
+  text-shadow: 1px 1px 2px #00000030;
+}
+
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  height: 300px; /* reduced to accommodate smaller cards */
+}
+
+.carousel-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #fcb045, #fd1d1d, #833ab4);
+  border-radius: 4px;
+}
+
+.carousel-card {
+  position: relative;
+  min-width: 175px; /* further reduced for smaller cards */
+  height: 150px; /* further reduced for smaller cards */
+  perspective: 1000px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.card-front {
+  background: linear-gradient(145deg, #f6d8ff, #e8c6ff);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.95;
+  max-height: 100px;
+  border-radius: 12px;
+}
+
+.card-back {
+  background: #fff0fb;
+  color: #5c2a9d;
+  transform: rotateY(180deg);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "DM Serif Display", serif;
+  box-shadow: inset 0 0 10px #e2b4ff;
+}
+
+.card-back h3 {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.card-back p {
+  font-size: 0.65rem;
+  opacity: 0.85;
+}

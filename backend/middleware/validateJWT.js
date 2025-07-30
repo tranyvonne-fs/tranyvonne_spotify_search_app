@@ -1,19 +1,33 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+import jwt from "jsonwebtoken";
+import axios from "axios";
+import User from "../models/User.js";
 
-const validateJWT = async (req, res) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) return res.json({ valid: false });
+const validateJWT = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader)
+    return res.status(401).json({ message: "Missing authorization header" });
+
+  const token = authHeader.split(" ")[1];
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findOne({ spotifyId: decoded.spotifyId });
-    if (!user) return res.json({ valid: false });
 
-    return res.json({ valid: true });
+    if (!user || user.jwt !== token) {
+      return res.status(401).json({ message: "User not found or token mismatch" });
+    }
+
+    req.user = {
+      spotifyId: user.spotifyId,
+      accessToken: user.accessToken,
+      refreshToken: user.refreshToken,
+    };
+
+    next();
   } catch (err) {
-    return res.json({ valid: false });
+    console.error("JWT validation failed:", err.message);
+    return res.status(401).json({ message: "Invalid or expired token" });
   }
 };
 
-module.exports = validateJWT;
+export default validateJWT;
